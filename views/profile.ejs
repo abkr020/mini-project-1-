@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <!-- bg red 500 not working -->
+        <a class="bg-red-500" href="/logout">logout</a>
+        <h1>hellow <%= user.name  %> to your profile</h1>
+        <h3>you can create a new post</h3>
+        <form action="/post" method="post">
+            <textarea name="content" placeholder="whats in your mind"></textarea>
+            <input type="submit" value="create post">
+        </form>
+        <div>
+            <h3>your posts</h3>
+            <div>
+                
+                <% user.post.reverse().forEach(post => { %>
+                    <div>
+                        <h4>@<%= user.username  %></h4>
+                        <p><%= post.content %></p>
+                        <small> <%= post.likes.length %> likes</small>
+                        <div>
+                            <a href="/like/<%= post._id  %>"><%= post.likes.indexOf(user._id) === -1 ? "like" : "unlike" %></a>
+                            <a href="/edit/<%= post._id %>">edit</a>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
